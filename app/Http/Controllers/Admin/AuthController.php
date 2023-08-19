@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use App\Http\Requests\UserFormRequest;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 
 class AuthController extends Controller
@@ -44,7 +45,7 @@ class AuthController extends Controller
         $admin->name = $data['name']; 
         $admin->phone = $data['phone']; 
         $admin->email = $data['email']; 
-        $admin->password = bcrypt($data['password']); 
+        $admin->password = Hash::make($data['password']); 
 
         $admin->save();
         return redirect()->route('admin.auth-register')->with('msg', 'Tạo tại khoản thành công!!');
